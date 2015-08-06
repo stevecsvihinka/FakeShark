@@ -3,27 +3,37 @@
 </head>
 
 <body>
-  {{> hello}}
+  {{> outer}}
 </body>
 
 <template name="hello">
 <input type="file" id="inputAudio">
 <input type="submit" id="submitAudio">
 <br>
-			
+	{{#if Template.subscriptionsReady}}
 	{{#each showAudio}}
 	{{#if isAudio}}
 	<ul class="songList">
 	<li>
 	URL: {{this.url}}
 		<audio controls preload="auto">
-				URL: {{this.url}}
 			<source src="{{this.url}}" type="audio/mpeg">
 			Your browser does not support the audio element.
 		</audio>
+		<a href="{{this.url download=true}}" class="btn btn-primary" target="_parent">Download</a>
 	</li>
 	</ul>
 		{{/if}}
 	{{/each}}
-			
+	{{else}}
+	Loading...
+{{/if}}	
+</template>
+
+<template name="outer">
+{{#if Template.subscriptionsReady}}
+	{{> hello}}
+{{else}}
+	Loading...
+{{/if}}	
 </template>
