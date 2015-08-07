@@ -10,11 +10,11 @@
      fsFile = new FS.File(file);
      console.log(fsFile);   
   
-      ID3.loadTags(file.url, function() {
-      var tags = ID3.getAllTags(file.url);
+      ID3.loadTags('cfs/files/AudioCollection/'+fsFile._id+'/'+file.url, function() {
+      tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFile._id+'/'+file.url);
       console.log(tags.artist + " - " + tags.title + ", " + tags.album);
       });
-
+      
      fsFile.metadata = {coolText:"coolText"} //FS.File support metadata.
      AudioCollection.insert(fsFile);//insert
   }//function
