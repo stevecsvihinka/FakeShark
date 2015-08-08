@@ -15,13 +15,15 @@
 	{{#if isAudio}}
 	<ul class="songList">
 	<li>
-	URL: {{this.url}}
+	<!-- URL: {{this.url}} --> 
+	{{this.coolText}}
 		<audio controls preload="auto">
 			<source src="{{this.url}}" type="audio/mpeg">
 			Your browser does not support the audio element.
 		</audio>
 		<a href="{{this.url download=true}}" class="btn btn-primary" target="_parent">Download</a>
-	</li>
+		<input type="submit" id="songInfo">
+			</li>
 	</ul>
 		{{/if}}
 	{{/each}}
