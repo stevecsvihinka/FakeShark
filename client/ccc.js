@@ -1,3 +1,7 @@
+  var _player = document.getElementById("player"),
+    _playlist = document.getElementById("playlist"),
+    _stop = document.getElementById("stop");
+
   Template.hello.onCreated(function() {
   Meteor.subscribe('lecture_audio');
   this.subscribe('lecture_audio');
@@ -52,9 +56,29 @@
   }
 })
 
-// Template.hello.rendered = function() {
-//   ID3.loadTags(fsFile, function() {
-//      var tags = ID3.getAllTags(fsFile);
-//      console.log(tags.artist + " - " + tags.title + ", " + tags.album);
-//      });  
-//  }
+  Template.hello.events({
+  'click li': function(){
+    document.onclick = function(evt) {
+    var evt=window.event || evt; // window.event for IE
+    if (!evt.target) evt.target=evt.srcElement; // extend target property for IE
+    tar = (evt.target); // target is clicked
+    console.log(tar);
+    playlistItemClick(tar);
+  }
+
+  }
+})
+
+function playlistItemClick(clickedElement) {
+    clickedElement.classList.add("selected");
+    var abc = clickedElement.getAttribute("id");
+    $("#player").attr("src", abc);
+    _player.play();
+}
+
+function playNext() {
+    var selected = _playlist.querySelector("li.selected");
+    if (selected && selected.nextSibling) {
+        playlistItemClick(selected.nextSibling);
+    }
+}

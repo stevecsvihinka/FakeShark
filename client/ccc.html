@@ -10,26 +10,23 @@
 <input type="file" id="inputAudio">
 <input type="submit" id="submitAudio">
 <br>
+<audio controls autoplay id="player"></audio>
+	<ul class="songList">
 	{{#if Template.subscriptionsReady}}
 	{{#each showAudio}}
 	{{#if isAudio}}
-	<ul class="songList">
-	<li>
+	<li id="{{this.url}}">
 	<!-- URL: {{this.url}} --> 
 	{{this.coolText}}
-		<audio controls preload="auto">
-			<source src="{{this.url}}" type="audio/mpeg">
-			Your browser does not support the audio element.
-		</audio>
 		<a href="{{this.url download=true}}" class="btn btn-primary" target="_parent">Download</a>
 		<input type="submit" id="songInfo">
 			</li>
-	</ul>
 		{{/if}}
 	{{/each}}
 	{{else}}
 	Loading...
 {{/if}}	
+</ul>
 </template>
 
 <template name="outer">
