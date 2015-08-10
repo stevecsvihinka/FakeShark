@@ -73,9 +73,14 @@
 
 function playlistItemClick(clickedElement) {
     clickedElement.classList.add("selected");
+    x = clickedElement;
+    var toBeRemoved = $( '.selected' ).first()[0];
+    if (toBeRemoved !== x)
+    {
+      toBeRemoved.classList.remove("selected");
+    }
     abc = clickedElement.getAttribute("id");
     $("#player").attr("src", abc);
-
 }
 
 function playNext() {
