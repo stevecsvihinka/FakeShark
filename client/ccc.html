@@ -11,22 +11,31 @@
 <input type="submit" id="submitAudio">
 <br>
 <audio controls autoplay id="player"></audio>
-	<ul class="songList">
+
+<div id="navcontainer">
+
+
+
+
+	
+	<ul class="songList" id="navcontainer">
 	{{#if Template.subscriptionsReady}}
 	{{#each showAudio}}
 	{{#if isAudio}}
 	<li id="{{this.url}}">
 	<!-- URL: {{this.url}} --> 
-	{{this.coolText}}
+	<a href="#" id="{{this.url}}" class="noblue">{{this.coolText}}</a>
 		<a href="{{this.url download=true}}" class="btn btn-primary" target="_parent">Download</a>
 		<input type="submit" id="songInfo">
-			</li>
+			</li> 
 		{{/if}}
 	{{/each}}
 	{{else}}
 	Loading...
 {{/if}}	
 </ul>
+</div>
+
 </template>
 
 <template name="outer">

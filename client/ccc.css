@@ -1,4 +1,43 @@
 /* CSS declarations go here */
 .songList {
 	list-style: none;
+
+}
+body {
+	background-color: #89D8FF;
+}
+#navcontainer ul
+{
+list-style-type: none;
+text-align: left;
+}
+
+#navcontainer ul li 
+{
+background: transparent url(images/list-off.gif) left center no-repeat;
+padding-left: 15px;
+text-align: left;
+font: normal 11px "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+text-decoration: none;
+color: #999;
+}
+
+#navcontainer ul li a:hover
+{
+color: black;
+}
+
+#navcontainer ul li #selected
+{
+background: transparent url(images/list-active.gif) left center no-repeat;
+color: #666;
+}
+
+a:visited{
+	text-decoration: none;
+	color: #666;
+}
+
+.noblue {
+	text-decoration: none;
 }
