@@ -16,9 +16,9 @@
 	{{#if Template.subscriptionsReady}}
 	{{#each showAudio}}
 	{{#if isAudio}}
-	<li id="{{this.url}}">
+	<li id="{{this.url}}" class="noblue">
 	<!-- URL: {{this.url}} --> 
-	<a href="#" id="{{this.url}}" class="noblue">{{this.coolText}}</a>
+	{{this.coolText}}
 		<a href="{{this.url download=true}}" class="btn btn-primary" target="_parent">Download</a>
 		<input type="submit" id="songInfo">
 			</li> 

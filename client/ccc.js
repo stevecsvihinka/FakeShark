@@ -64,14 +64,24 @@
   }
 })
 
+  Template.hello.events({
+    'ended #player': function(){
+      nextElem = $( '.selected' ).next('li')[0];
+      playlistItemClick(nextElem);
+    }
+  })
+
 function playlistItemClick(clickedElement) {
     clickedElement.classList.add("selected");
-    var abc = clickedElement.getAttribute("id");
+    abc = clickedElement.getAttribute("id");
     $("#player").attr("src", abc);
+
 }
 
 function playNext() {
-    var selected = _playlist.querySelector("li.selected");
+    var selected = document.querySelector("li.a.selected");
+    console.log(selected);
+    console.log(selected.nextSibling);
     if (selected && selected.nextSibling) {
         playlistItemClick(selected.nextSibling);
     }
