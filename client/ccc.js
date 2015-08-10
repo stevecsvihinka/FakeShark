@@ -57,15 +57,10 @@
 })
 
   Template.hello.events({
-  'click li': function(){
-    document.onclick = function(evt) {
-    var evt=window.event || evt; // window.event for IE
-    if (!evt.target) evt.target=evt.srcElement; // extend target property for IE
+  'click .noblue': function(evt){
     tar = (evt.target); // target is clicked
     console.log(tar);
     playlistItemClick(tar);
-  }
-
   }
 })
 
@@ -73,7 +68,6 @@ function playlistItemClick(clickedElement) {
     clickedElement.classList.add("selected");
     var abc = clickedElement.getAttribute("id");
     $("#player").attr("src", abc);
-    _player.play();
 }
 
 function playNext() {

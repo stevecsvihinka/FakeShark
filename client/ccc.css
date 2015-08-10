@@ -1,10 +1,9 @@
 /* CSS declarations go here */
 .songList {
 	list-style: none;
-
 }
 body {
-	background-color: #89D8FF;
+	background-color: #E5FFF2;
 }
 #navcontainer ul
 {
@@ -41,5 +40,3 @@ a:visited{
 .noblue {
 	text-decoration: none;
 }
-
-/*bhjdasbhjafdbjhdsfbhj*/
