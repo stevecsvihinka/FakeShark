@@ -5,6 +5,11 @@
 body {
 	background-color: #E5FFF2;
 }
+
+#navcontainer{
+	border: 1px solid black;
+}
+
 #navcontainer ul
 {
 list-style-type: none;
@@ -13,12 +18,10 @@ text-align: left;
 
 #navcontainer ul li 
 {
-background: transparent url(images/list-off.gif) left center no-repeat;
-padding-left: 15px;
 text-align: left;
-font: normal 11px "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+font: normal 15px "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
 text-decoration: none;
-color: #999;
+color: black;
 }
 
 #navcontainer ul li a:hover
@@ -28,15 +31,32 @@ color: black;
 
 #navcontainer ul li #selected
 {
-background: transparent url(images/list-active.gif) left center no-repeat;
-color: #666;
+color: black;
 }
 
 a:visited{
 	text-decoration: none;
-	color: #666;
+	color: black;
 }
 
-.noblue {
-	text-decoration: none;
+.inline {
+	display: inline-block;
 }
+
+#inputAudio{
+	display: inline;
+}
+#submitAudio{
+	display: inline;
+}
+
+li{
+	max-width: 600px;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+li { background: white; }
+li:nth-child(odd) { background: #e3e3e3; }

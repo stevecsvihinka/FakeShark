@@ -9,3 +9,6 @@ autopublish
 insecure
 cfs:standard-packages
 cfs:gridfs
+twbs:bootstrap
+accounts-ui
+accounts-password
