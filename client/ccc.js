@@ -1,11 +1,12 @@
 _player = document.getElementById("player"),
 _playlist = document.getElementById("playlist"),
 _stop = document.getElementById("stop");
+Meteor.subscribe('votescollection')
 
 Template.hello.onCreated(function() {
   Meteor.subscribe('lecture_audio');
   this.subscribe('lecture_audio');
-  Meteor.subscribe()
+  Meteor.subscribe('votescollection');
 });
 
 Template.hello.events({
@@ -42,7 +43,7 @@ id3tags = function() {
 Template.outer.onCreated(function(){
   Meteor.subscribe('lecture_audio');
   this.subscribe('lecture_audio');
-  Meteor.subscribe('users');
+  Meteor.subscribe('votescollection');
 });
 
 Template.hello.helpers({
@@ -83,8 +84,8 @@ function playlistItemClick(clickedElement) {
 
 Template.hello.helpers({
   currentSong: function() {
-    ass = $('.selected').text();
-    return ass; 
+    z = $('.selected').text();
+    return z; 
    }
 });
 
@@ -93,10 +94,7 @@ Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
-Accounts.onCreateUser(function(options, user) {
-  user.vote = 0;
-  if (options.profile)
-    user.profile = options.profile;
-  return user;
-});
+// Accounts.onCreateUser({
+//   VotesCollection.insert({ 'user': Meteor.user(), 'votes': 0 })
+// });
 
