@@ -1,37 +1,34 @@
 <head>
-  <title>ccc</title>
+	<title>ccc</title>
 </head>
 
 <body>
-
-  {{> outer}}
+	{{> outer}}
 </body>
 
 <template name="hello">
-	
 	<div class="container">
-	<div class="col-md-4"></div>
-	<div class="col-md-4">
-	
-	<br>
-	<audio controls autoplay id="player"></audio>
-	{{currentSong}}
-	</div>
-	<div class="col-md-4"></div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<br>
+			<audio controls autoplay id="player"></audio>
+			{{currentSong}}
+		</div>
+		<div class="col-md-4"></div>
 	</div>
 
 	<div class="container">
-	<div class="row-fluid">
-		<div class="col-md-5" id="navcontainer"> <!--leftside-->
-		{{#if currentUser}}
-		<input type="file" id="inputAudio"> 
-		<input type="submit" id="submitAudio">
-		{{/if}}
+		<div class="row-fluid">
+			<div class="col-md-5" id="navcontainer"> <!--leftside-->
+			{{#if currentUser}}
+			<input type="file" id="inputAudio"> 
+			<input type="submit" id="submitAudio">
+			{{/if}}
 			<ul class="songList">
 			{{#if Template.subscriptionsReady}}
 			{{#each showAudio}}
 			{{#if isAudio}}
-				<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}">
+			<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}">
 				{{this.coolText}} 
 				<div class="inline">
 				<a href="{{this.url download=true}}" target="_parent">Download</a> |
@@ -61,12 +58,12 @@
 </template>
 
 <template name="outer">
-{{#if Template.subscriptionsReady}}
-	{{> loginButtons}}
- 	<img id="logotext" src="logotext.png"/>
-	<img id="shark" src="shark.png"/>
-	{{> hello}}
-{{else}}
-	Loading...
-{{/if}}	
+	{{#if Template.subscriptionsReady}}
+		{{> loginButtons}}
+ 		<img id="logotext" src="logotext.png"/>
+		<img id="shark" src="shark.png"/>
+		{{> hello}}
+	{{else}}
+		Loading...
+	{{/if}}	
 </template>

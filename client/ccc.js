@@ -1,6 +1,5 @@
 _player = document.getElementById("player"),
-_playlist = document.getElementById("playlist"),
-_stop = document.getElementById("stop");
+_playlist = document.getElementById("playlist");
 Meteor.subscribe('votescollection')
 
 Template.hello.onCreated(function() {
@@ -12,18 +11,12 @@ Template.hello.onCreated(function() {
 Template.hello.events({
   'click #submitAudio': 
   submitAudio = function(){  
-    file =  $('#inputAudio').get(0).files[0] //Some jQuery to get the value.
+    file =  $('#inputAudio').get(0).files[0]
     console.log(file);
     fsFile = new FS.File(file);
     fsFileClone = fsFile;
     console.log(fsFile);      
-
-    // ID3.loadTags('cfs/files/AudioCollection/'+fsFile._id+'/'+file.url, function() {
-    // tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFile._id+'/'+file.url);
-    // fsFile.metadata = {coolText: tags.artist + " - " + tags.title + ": added by " + Meteor.user().username}
-    // });
-
-    AudioCollection.insert(fsFile);//insert
+    AudioCollection.insert(fsFile);
   }//function
 })//events
 
@@ -39,8 +32,7 @@ id3tags = function() {
   AudioCollection.update({_id: fsFileClone._id}, {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
   AudioCollection.update({_id: fsFileClone._id}, {$set: {uploader: Meteor.user().username } });
   AudioCollection.update({_id: fsFileClone._id}, {$set: {plays: 0} });
-  });//second param of loadtags
-  
+  });//second param of loadtags  
 }//id3tags
 
 Template.outer.onCreated(function(){
@@ -96,23 +88,27 @@ Template.hello.helpers({
    }
 });
 
-
 Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
 Template.loginButtons.events({
-  'click #login-buttons-password' : function () {
-    setTimeout(function(){   
-      VotesCollection.insert( {username: Meteor.user().username})
-      uu = VotesCollection.findOne({username: Meteor.user().username})._id;
-      VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
-     }, 2000);
-  }
+  'click #login-buttons-password' : function (e) {
+    clickedDiv = $(e.target).text();
+    setTimeout(function(){
+    if (clickedDiv.indexOf('Create account') != -1)
+    {  
+    console.log('fuck'); 
+    VotesCollection.insert( {username: Meteor.user().username})
+    uu = VotesCollection.findOne({username: Meteor.user().username})._id;
+    VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
+    }
+  }, 2000);
+}
 })
 
 Template.hello.helpers({
   users: function() {
-  return VotesCollection.find();
-}
+  return VotesCollection.find({}, { sort: { plays: -1 } });
+  }
 })
