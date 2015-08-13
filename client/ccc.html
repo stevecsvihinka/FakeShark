@@ -47,7 +47,13 @@
 	</div> 
 	<div class="col-md-2"> </div> <!--middle-->
 	<div id="navcontainer" class="col-md-5">
-hh
+	<ul>
+	{{#each users}}
+	<li>
+	{{this.username}} {{this.plays}}
+	</li>
+	{{/each}}
+	</ul>
 </div> <!--rightside-->
 
 </div>

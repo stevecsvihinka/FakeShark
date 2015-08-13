@@ -36,9 +36,12 @@ Template.hello.events({
 id3tags = function() {
   ID3.loadTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url, function() {
   tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url);
-  AudioCollection.update({_id: fsFileClone._id}, {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} });
-  });
-}
+  AudioCollection.update({_id: fsFileClone._id}, {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
+  AudioCollection.update({_id: fsFileClone._id}, {$set: {uploader: Meteor.user().username } });
+  AudioCollection.update({_id: fsFileClone._id}, {$set: {plays: 0} });
+  });//second param of loadtags
+  
+}//id3tags
 
 Template.outer.onCreated(function(){
   Meteor.subscribe('lecture_audio');
@@ -94,7 +97,18 @@ Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
-// Accounts.onCreateUser({
-//   VotesCollection.insert({ 'user': Meteor.user(), 'votes': 0 })
-// });
+Template.loginButtons.events({
+  'click #login-buttons-password' : function () {
+    setTimeout(function(){   
+      VotesCollection.insert( {username: Meteor.user().username})
+      uu = VotesCollection.findOne({username: Meteor.user().username})._id;
+      VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
+     }, 2000);
+  }
+})
 
+Template.hello.helpers({
+  users: function() {
+  return VotesCollection.find();
+}
+})
