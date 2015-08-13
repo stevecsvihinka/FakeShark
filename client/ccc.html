@@ -3,7 +3,7 @@
 </head>
 
 <body>
-  {{> loginButtons}}
+
   {{> outer}}
 </body>
 
@@ -31,7 +31,7 @@
 			{{#if Template.subscriptionsReady}}
 			{{#each showAudio}}
 			{{#if isAudio}}
-				<li id="{{this.url}}" class="noblue">
+				<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}">
 				{{this.coolText}} 
 				<div class="inline">
 				<a href="{{this.url download=true}}" target="_parent">Download</a> |
@@ -47,10 +47,10 @@
 	</div> 
 	<div class="col-md-2"> </div> <!--middle-->
 	<div id="navcontainer" class="col-md-5">
-	<ul>
+	<ul id="pushdown">
 	{{#each users}}
 	<li>
-	{{this.username}} {{this.plays}}
+	{{this.username}} Total Plays: {{this.plays}}
 	</li>
 	{{/each}}
 	</ul>
@@ -62,6 +62,9 @@
 
 <template name="outer">
 {{#if Template.subscriptionsReady}}
+	{{> loginButtons}}
+ 	<img id="logotext" src="logotext.png"/>
+	<img id="shark" src="shark.png"/>
 	{{> hello}}
 {{else}}
 	Loading...

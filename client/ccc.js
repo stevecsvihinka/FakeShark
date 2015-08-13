@@ -59,30 +59,34 @@ Template.hello.events({
   'click .noblue': function(evt){
     tar = (evt.target); // target is clicked
     console.log(tar);
-    playlistItemClick(tar);
+    playSong(tar);
   }
 })
 
 Template.hello.events({
   'ended #player': function(){
+      tempId = $( '.selected' ).attr('rel');
+      var grabId = VotesCollection.findOne({username: tempId})._id;
+      incrementNum = VotesCollection.findOne({username: tempId}).plays + 1;
+      VotesCollection.update({_id: grabId}, {$set: {plays: incrementNum} });
       nextElem = $( '.selected' ).next('li')[0];
-      playlistItemClick(nextElem);
+      playSong(nextElem);
   }
 })
 
-function playlistItemClick(clickedElement) {
+function playSong(clickedElement) {
   clickedElement.classList.add("selected");
   x = clickedElement;
   var toBeRemoved = $( '.selected' );
   for (i=0; i < toBeRemoved.length; i++)
-  {
-    if (toBeRemoved[i] !== x)
-      {
-        toBeRemoved[i].classList.remove("selected");
-      }
-  }    
-  abc = clickedElement.getAttribute("id");
-  $("#player").attr("src", abc);
+    {
+      if (toBeRemoved[i] !== x)
+        {
+          toBeRemoved[i].classList.remove("selected");
+        }
+    }    
+  songId = clickedElement.getAttribute("id");
+  $("#player").attr("src", songId);
 }
 
 Template.hello.helpers({
