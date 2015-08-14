@@ -19,7 +19,7 @@
 
 	<div class="container">
 		<div class="row-fluid">
-			<div class="col-md-5" id="navcontainer"> <!--leftside-->
+			<div class="col-md-4" id="navcontainer"> <!--leftside-->
 			{{#if currentUser}}
 			<input type="file" id="inputAudio"> 
 			<input type="submit" id="submitAudio">
@@ -42,8 +42,7 @@
 			{{/if}}	
 			</ul>
 	</div> 
-	<div class="col-md-2"> </div> <!--middle-->
-	<div id="navcontainer" class="col-md-5">
+	<div id="navcontainer" class="col-md-4">
 	<ul id="pushdown">
 	{{#each users}}
 	<li>
@@ -51,6 +50,10 @@
 	</li>
 	{{/each}}
 	</ul>
+</div>
+ <!--middle-->
+	<div id="navcontainer" class="col-md-4">
+	{{> chat}}
 </div> <!--rightside-->
 
 </div>
