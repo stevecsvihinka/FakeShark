@@ -92,20 +92,19 @@ Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
-Template.loginButtons.events({
-  'click #login-buttons-password' : function (e) {
-    clickedDiv = $(e.target).text();
-    setTimeout(function(){
-    if (clickedDiv.indexOf('Create account') != -1)
-    {  
-    console.log('fuck'); 
-    VotesCollection.insert( {username: Meteor.user().username})
-    uu = VotesCollection.findOne({username: Meteor.user().username})._id;
-    VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
-    }
-  }, 2000);
-}
-})
+// Template.loginButtons.events({
+//   'click #login-buttons-password' : function (e) {
+//     clickedDiv = $(e.target).text();
+//     setTimeout(function(){
+//     if (clickedDiv.indexOf('Create account') != -1)
+//     {   
+//     VotesCollection.insert( {username: Meteor.user().username})
+//     uu = VotesCollection.findOne({username: Meteor.user().username})._id;
+//     VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
+//     }
+//   }, 2000);
+// }
+// })
 
 Template.hello.helpers({
   users: function() {
