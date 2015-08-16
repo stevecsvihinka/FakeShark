@@ -29,7 +29,8 @@ Template.hello.events({
 id3tags = function() {
   ID3.loadTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url, function() {
   tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url);
-  AudioCollection.update({_id: fsFileClone._id}, {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
+  AudioCollection.update({_id: fsFileClone._id}, 
+  {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
   AudioCollection.update({_id: fsFileClone._id}, {$set: {uploader: Meteor.user().username } });
   AudioCollection.update({_id: fsFileClone._id}, {$set: {plays: 0} });
   });//second param of loadtags  
@@ -49,7 +50,7 @@ Template.hello.helpers({
 
 Template.hello.events({
   'click .noblue': function(evt){
-    tar = (evt.target); // target is clicked
+    var tar = (evt.target); // target is clicked
     console.log(tar);
     playSong(tar);
   }
@@ -68,11 +69,10 @@ Template.hello.events({
 
 function playSong(clickedElement) {
   clickedElement.classList.add("selected");
-  x = clickedElement;
   var toBeRemoved = $( '.selected' );
   for (i=0; i < toBeRemoved.length; i++)
     {
-      if (toBeRemoved[i] !== x)
+      if (toBeRemoved[i] !== clickedElement)
         {
           toBeRemoved[i].classList.remove("selected");
         }
@@ -80,6 +80,8 @@ function playSong(clickedElement) {
   songId = clickedElement.getAttribute("id");
   $("#player").attr("src", songId);
 }
+
+
 
 Template.hello.helpers({
   currentSong: function() {
@@ -92,22 +94,22 @@ Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
-// Template.loginButtons.events({
-//   'click #login-buttons-password' : function (e) {
-//     clickedDiv = $(e.target).text();
-//     setTimeout(function(){
-//     if (clickedDiv.indexOf('Create account') != -1)
-//     {   
-//     VotesCollection.insert( {username: Meteor.user().username})
-//     uu = VotesCollection.findOne({username: Meteor.user().username})._id;
-//     VotesCollection.update({_id: uu}, {$set: {plays: 0} });      
-//     }
-//   }, 2000);
-// }
-// })
-
 Template.hello.helpers({
   users: function() {
   return VotesCollection.find({}, { sort: { plays: -1 } });
   }
 })
+
+Template.hello.events({
+  'click .usernames': function(clickedUsername){
+   var userName =($(clickedUsername.target).attr('id'));
+   console.log(userName);
+   gg = $("li[rel=" + userName +"]");
+   console.log(gg);
+   $('.noblue').toggle(false);
+   $("li[rel=" + userName +"]").toggle(true);
+    
+  }
+})
+
+

@@ -24,7 +24,7 @@
 			<input type="file" id="inputAudio"> 
 			<input type="submit" id="submitAudio">
 			{{/if}}
-			<ul class="songList">
+			<ul id="songList" class="songList">
 			{{#if Template.subscriptionsReady}}
 			{{#each showAudio}}
 			{{#if isAudio}}
@@ -43,9 +43,9 @@
 			</ul>
 	</div> 
 	<div id="navcontainer" class="col-md-4">
-	<ul id="pushdown">
+	<ul class="pushdown">
 	{{#each users}}
-	<li>
+	<li class="usernames" id="{{this.username}}">
 	{{this.username}} Total Plays: {{this.plays}}
 	</li>
 	{{/each}}

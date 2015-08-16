@@ -74,10 +74,10 @@ li:nth-child(odd) { background: #e3e3e3; }
 	padding-bottom: 10px;
 }
 
-#pushdown {
+.pushdown {
 	padding-top: 26px;
 }
 
 .selected {
-	text-decoration: bold;
+	font-weight: bold;
 }

@@ -2,7 +2,7 @@
 {{#if currentUser}}
 {{> chatInput}}
 
-<ul id="pushdown">
+<ul class="pushdown">
   {{#each chat}}
   <li>
   {{this.name}}: {{this.message}}
@@ -21,10 +21,10 @@
         <div class="container" style="max-width:100%">
             <div class="row">
                 <div class="col-sm-8">
-                    <input class="form-control" type="text" name="message" id="message" placeholder="this song be dope">
+                    <input class="form-control" type="text" name="message" id="message" placeholder="Enter message">
                 </div>
 
-                <button type="submit" value="Send" class="btn btn-default col-sm-4">send?</button>
+                <button type="submit" value="Send" class="btn btn-default col-sm-4">Send</button>
             </div>
         </div>
     </form>

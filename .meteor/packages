@@ -12,3 +12,5 @@ cfs:gridfs
 twbs:bootstrap
 accounts-ui
 accounts-password
+mrt:jquery-ui
+mrt:jquery-ui-sortable
