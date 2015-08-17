@@ -62,7 +62,7 @@ Template.hello.events({
       var grabId = VotesCollection.findOne({username: tempId})._id;
       incrementNum = VotesCollection.findOne({username: tempId}).plays + 1;
       VotesCollection.update({_id: grabId}, {$set: {plays: incrementNum} });
-      nextElem = $( '.selected' ).next('li')[0];
+      nextElem = $( '.selected' ).nextAll('li:visible:first')[0];
       playSong(nextElem);
   }
 })
@@ -78,6 +78,7 @@ function playSong(clickedElement) {
         }
     }    
   songId = clickedElement.getAttribute("id");
+  // clickedElement.getAttribute("style") == "display: list-item;"
   $("#player").attr("src", songId);
 }
 
