@@ -12,6 +12,7 @@ Template.hello.events({
   'click #submitAudio': 
   submitAudio = function(){  
     file =  $('#inputAudio').get(0).files[0]
+    fileClone = file;
     console.log(file);
     fsFile = new FS.File(file);
     fsFileClone = fsFile;
@@ -27,6 +28,7 @@ Template.hello.events({
 })
 
 id3tags = function() {
+  var collectionId = 'cfs/files/AudioCollection/'+fsFileClone._id+'/'+fileClone.url;
   ID3.loadTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url, function() {
   tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url);
   AudioCollection.update({_id: fsFileClone._id}, 
@@ -81,14 +83,6 @@ function playSong(clickedElement) {
   // clickedElement.getAttribute("style") == "display: list-item;"
   $("#player").attr("src", songId);
 }
-
-
-
-Template.hello.helpers({
-  currentSong: function() {
-    return AudioCollection.findOne({url: $('#player').attr('src')}).coolText; 
-   }
-});
 
 Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'

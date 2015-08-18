@@ -45,6 +45,8 @@ a:visited{
 }
 #submitAudio{
 	display: inline;
+	padding-right: 15px;
+
 }
 
 li{
@@ -52,7 +54,7 @@ li{
 }
 
 li { background: white; }
-li:nth-child(odd) { background: #e3e3e3; }
+li:nth-child(odd) { background: transparent; }
 
 #logotext {
 	width: 500px;
@@ -79,9 +81,7 @@ li:nth-child(odd) { background: #e3e3e3; }
 	padding-top: 26px;
 }
 
-.selected {
-	font-weight: bold;
-}
+
 
 #songList {
 	padding-top: 61px;
@@ -113,4 +113,26 @@ li:nth-child(odd) { background: #e3e3e3; }
 
 span{
 	float: left;
+}
+
+#smallText {
+	display: inline;
+	font-size: 12px;
+	font-style: italic;
+	padding-left: 5px;
+}
+
+.totalPlays {
+	display: inline;
+	float: right;
+}
+
+audio {
+	display: table;
+  margin: 0 auto;
+}
+
+li.selected {
+	background-color: #ffe5f2;
+	color: white;
 }

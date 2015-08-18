@@ -4,9 +4,8 @@ Template.chatInput.events({
 		var chatInput = $(e.currentTarget);
 		var message = chatInput.find('#message').val();
 		var user = Meteor.user().username;
-
-		
 		ChatRoom.insert({name: user, message: message});
+		$('#message').val('');
 	}
 });
 

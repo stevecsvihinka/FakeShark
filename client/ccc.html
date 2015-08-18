@@ -12,7 +12,6 @@
 		<div class="col-md-4">
 			<br>
 			<audio controls autoplay id="player"></audio>
-			<!-- {{currentSong}} -->
 		</div>
 		<div class="col-md-4"></div>
 	</div>
@@ -46,10 +45,10 @@
 	</div> 
 	<div id="navcontainer" class="col-md-4">
 	<ul class="pushdown align">
-	<li id="leaderboard"><b>Leaderboard</b></li>
+	<li id="leaderboard"><b>Leaderboard</b><div id="smallText">(click a user to toggle their songs)</div></li>
 	{{#each users}}
 	<li class="usernames" id="{{this.username}}">
-	{{this.username}} Total Plays: {{this.plays}}
+	{{this.username}} <div class="totalPlays">Total Plays: {{this.plays}}</div>
 	</li>
 	{{/each}}
 	</ul>
