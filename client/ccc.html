@@ -12,7 +12,7 @@
 		<div class="col-md-4">
 			<br>
 			<audio controls autoplay id="player"></audio>
-			{{currentSong}}
+			<!-- {{currentSong}} -->
 		</div>
 		<div class="col-md-4"></div>
 	</div>
@@ -21,10 +21,12 @@
 		<div class="row-fluid">
 			<div class="col-md-4" id="navcontainer"> <!--leftside-->
 			{{#if currentUser}}
-			<input type="file" id="inputAudio"> 
-			<input type="submit" id="submitAudio">
+ 			<span class="btn btn-default btn-file">
+    		Browse Files <input type="file" id="inputAudio">
+			</span>	
+			<input type="submit" id="submitAudio" class="btn btn-default col-sm-4">
 			{{/if}}
-			<ul id="songList" class="songList">
+			<ul id="songList" class="pushdown align">
 			{{#if Template.subscriptionsReady}}
 			{{#each showAudio}}
 			{{#if isAudio}}
@@ -43,7 +45,8 @@
 			</ul>
 	</div> 
 	<div id="navcontainer" class="col-md-4">
-	<ul class="pushdown">
+	<ul class="pushdown align">
+	<li id="leaderboard"><b>Leaderboard</b></li>
 	{{#each users}}
 	<li class="usernames" id="{{this.username}}">
 	{{this.username}} Total Plays: {{this.plays}}

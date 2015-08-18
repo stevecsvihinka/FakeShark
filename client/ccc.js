@@ -86,8 +86,7 @@ function playSong(clickedElement) {
 
 Template.hello.helpers({
   currentSong: function() {
-    z = $('.selected').text();
-    return z; 
+    return AudioCollection.findOne({url: $('#player').attr('src')}).coolText; 
    }
 });
 
@@ -109,8 +108,11 @@ Template.hello.events({
    console.log(gg);
    $('.noblue').toggle(false);
    $("li[rel=" + userName +"]").toggle(true);
-    
   }
 })
 
-
+Template.hello.events({
+  'click #leaderboard': function(){
+    $('.noblue').toggle(true);
+  }
+})

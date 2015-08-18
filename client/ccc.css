@@ -1,6 +1,7 @@
 /* CSS declarations go here */
 .songList {
 	list-style: none;
+	padding-top: 50px;
 }
 body {
 	background-color: #E5FFF2;
@@ -80,4 +81,36 @@ li:nth-child(odd) { background: #e3e3e3; }
 
 .selected {
 	font-weight: bold;
+}
+
+#songList {
+	padding-top: 61px;
+}
+
+.align {
+	padding-top: 61px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: inline;
+}
+
+span{
+	float: left;
 }
