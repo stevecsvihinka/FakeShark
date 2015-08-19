@@ -12,6 +12,10 @@ body {
 list-style-type: none;
 text-align: left;
 }
+ul, ol {
+	margin-top:30px;
+	margin-bottom: 10px;
+}
 
 #navcontainer ul li 
 {
@@ -78,13 +82,18 @@ li:nth-child(odd) { background: transparent; }
 }
 
 .pushdown {
-	padding-top: 26px;
+	padding-top: 0px;
+}
+test{
+margin-top: 65px;	
 }
 
-
+.pushdown2 {
+	padding-top: 0px;
+}
 
 #songList {
-	padding-top: 61px;
+	margin-top: 65px;
 }
 
 .align {
@@ -135,4 +144,17 @@ audio {
 li.selected {
 	background-color: #ffe5f2;
 	color: white;
+}
+
+.test{
+
+ overflow-y: scroll;
+ width:300px;
+ height: 200px
+
+}
+.test4{
+
+margin-top:5px!important; 
+
 }
