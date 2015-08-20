@@ -148,13 +148,32 @@ li.selected {
 
 .test{
 
- overflow-y: scroll;
+ overflow-y: auto;
  width:300px;
- height: 200px
-
+ height: 35
+ 0px;
+ 
 }
 .test4{
 
 margin-top:5px!important; 
 
+}
+
+.usernames {
+    cursor: pointer;
+}
+
+.usernames:hover {
+	background-color: #ffe5f2;
+}
+
+
+
+.noblue:hover {
+	background-color: #ffe5f2;
+}
+
+#random {
+	display: inline-block;
 }

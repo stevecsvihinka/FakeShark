@@ -6,12 +6,13 @@
 	{{> outer}}
 </body>
 
-<template name="hello">
+<template name="fakesharkPlayer">
 	<div class="container">
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
 			<br>
 			<audio controls autoplay id="player"></audio>
+			<span class="glyphicon glyphicon-random" id="random"></span>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
@@ -32,7 +33,7 @@
 			{{#each showAudio}}
 			{{#if isAudio}}
 			<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}" style="display: list-item">
-				{{this.coolText}} 
+				{{this.metadata}} 
 				<div class="inline">
 				<a href="{{this.url download=true}}" target="_parent">Download</a> |
 				<a id="songInfo">Add to Playlist</a>
@@ -47,7 +48,7 @@
 		</div> 
 	<div id="navcontainer" class="col-md-4">
 	<ul class="pushdown align test4">
-	<li id="leaderboard"><b>Leaderboard</b><div id="smallText">(click a user to toggle their songs)</div></li>
+	<li id="leaderboard" class="usernames"><b>Leaderboard</b><div id="smallText">(click a user to toggle their songs)</div></li>
 	{{#each users}}
 	<li class="usernames" id="{{this.username}}">
 	{{this.username}} <div class="totalPlays">Total Plays: {{this.plays}}</div>
@@ -69,7 +70,7 @@
 		{{> loginButtons}}
  		<img id="logotext" src="logotext.png"/>
 		<img id="shark" src="shark.png"/>
-		{{> hello}}
+		{{> fakesharkPlayer}}
 	{{else}}
 		Loading...
 	{{/if}}	

@@ -2,13 +2,13 @@ _player = document.getElementById("player"),
 _playlist = document.getElementById("playlist");
 Meteor.subscribe('votescollection')
 
-Template.hello.onCreated(function() {
+Template.fakesharkPlayer.onCreated(function() {
   Meteor.subscribe('lecture_audio');
   this.subscribe('lecture_audio');
   Meteor.subscribe('votescollection');
 });
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'click #submitAudio': 
   submitAudio = function(){  
     file =  $('#inputAudio').get(0).files[0]
@@ -21,7 +21,7 @@ Template.hello.events({
   }//function
 })//events
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'click #songInfo': function() {
     id3tags();
   }
@@ -32,7 +32,7 @@ id3tags = function() {
   ID3.loadTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url, function() {
   tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url);
   AudioCollection.update({_id: fsFileClone._id}, 
-  {$set: {coolText: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
+  {$set: {metadata: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
   AudioCollection.update({_id: fsFileClone._id}, {$set: {uploader: Meteor.user().username } });
   AudioCollection.update({_id: fsFileClone._id}, {$set: {plays: 0} });
   });//second param of loadtags  
@@ -44,13 +44,13 @@ Template.outer.onCreated(function(){
   Meteor.subscribe('votescollection');
 });
 
-Template.hello.helpers({
+Template.fakesharkPlayer.helpers({
   showAudio:function(){
     return AudioCollection.find();
   }
 })
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'click .noblue': function(evt){
     var tar = (evt.target); // target is clicked
     console.log(tar);
@@ -58,7 +58,7 @@ Template.hello.events({
   }
 })
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'ended #player': function(){
       tempId = $( '.selected' ).attr('rel');
       var grabId = VotesCollection.findOne({username: tempId})._id;
@@ -72,15 +72,12 @@ Template.hello.events({
 function playSong(clickedElement) {
   clickedElement.classList.add("selected");
   var toBeRemoved = $( '.selected' );
-  for (i=0; i < toBeRemoved.length; i++)
-    {
-      if (toBeRemoved[i] !== clickedElement)
-        {
+  for (i=0; i < toBeRemoved.length; i++) {
+      if (toBeRemoved[i] !== clickedElement) {
           toBeRemoved[i].classList.remove("selected");
-        }
-    }    
+      }
+  }    
   songId = clickedElement.getAttribute("id");
-  // clickedElement.getAttribute("style") == "display: list-item;"
   $("#player").attr("src", songId);
 }
 
@@ -88,13 +85,13 @@ Accounts.ui.config({
 passwordSignupFields: 'USERNAME_ONLY'
 })
 
-Template.hello.helpers({
+Template.fakesharkPlayer.helpers({
   users: function() {
   return VotesCollection.find({}, { sort: { plays: -1 } });
   }
 })
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'click .usernames': function(clickedUsername){
    var userName =($(clickedUsername.target).attr('id'));
    console.log(userName);
@@ -105,7 +102,7 @@ Template.hello.events({
   }
 })
 
-Template.hello.events({
+Template.fakesharkPlayer.events({
   'click #leaderboard': function(){
     $('.noblue').toggle(true);
   }
