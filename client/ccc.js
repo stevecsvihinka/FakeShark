@@ -10,7 +10,7 @@ Template.fakesharkPlayer.onCreated(function() {
 
 Template.fakesharkPlayer.events({
   'click #submitAudio': 
-  submitAudio = function(){  
+  submitAudio = function() {  
     file =  $('#inputAudio').get(0).files[0]
     fileClone = file;
     console.log(file);
@@ -18,8 +18,19 @@ Template.fakesharkPlayer.events({
     fsFileClone = fsFile;
     console.log(fsFile);      
     AudioCollection.insert(fsFile);
-  }//function
+  }//submitAudio
+  // ,
+  // 'click #submitAudio': function(){
+  //   console.log('fuvk');
+  //   submitAudio().done(id3tags());
+  // }
+
 })//events
+
+// Template.fakesharkPlayer.events({
+//   'click #submitAudio': 
+//   submitAudio().done(id3tags());
+// })
 
 Template.fakesharkPlayer.events({
   'click #songInfo': function() {
@@ -27,14 +38,19 @@ Template.fakesharkPlayer.events({
   }
 })
 
+// Template.fakesharkPlayer.autorun( function() {
+//     id3tags();
+//   })
+
+
 id3tags = function() {
-  var collectionId = 'cfs/files/AudioCollection/'+fsFileClone._id+'/'+fileClone.url;
+  collectionId = 'cfs/files/AudioCollection/'+fsFileClone._id+'/'+fileClone.url;
   ID3.loadTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url, function() {
   tags = ID3.getAllTags('cfs/files/AudioCollection/'+fsFileClone._id+'/'+file.url);
   AudioCollection.update({_id: fsFileClone._id}, 
   {$set: {metadata: tags.artist + " - " + tags.title + " added by: " + Meteor.user().username} }); 
   AudioCollection.update({_id: fsFileClone._id}, {$set: {uploader: Meteor.user().username } });
-  AudioCollection.update({_id: fsFileClone._id}, {$set: {plays: 0} });
+  AudioCollection.update({_id: fsFileClone._id}, {$set: {pos: 0} });
   });//second param of loadtags  
 }//id3tags
 
@@ -107,3 +123,55 @@ Template.fakesharkPlayer.events({
     $('.noblue').toggle(true);
   }
 })
+
+Template.fakesharkPlayer.events({
+  'click #random': function(){
+    songs = $('#songList').children();
+      random = Math.floor((Math.random() * (songs.length-1)) + 1);
+      if ($(songs[random]).hasClass('selected') !== true){
+        playSong(songs[random]);
+      }
+      else {
+        playSong(songs[random-1]);
+      }
+  }
+})
+
+Template.fakesharkPlayer.helpers ({
+    card : function () {
+        return AudioCollection.find({}, {sort: {pos: 1}}
+    )}
+})
+
+Template.fakesharkPlayer.rendered = function(){
+  
+     $("#songList").sortable({
+       items: ".noblue",
+       delay: 100,
+       refreshPositions: true,
+       revert: true,
+       helper: "clone",
+       scroll: true,
+       scrollSensitivity: 50,
+       scrollSpeed: 35,
+       start: function(event, ui) {
+        $(ui.helper).addClass("dragging");
+       }, // end of start
+       stop: function(event, ui) {
+        $(ui.item).removeClass("dragging");
+       }, // end of stop
+       update: function(event, ui) {
+        var index = 0;
+
+                
+        _.each($(".noblue"), function(item) {
+          AudioCollection.update({_id: item._id}, {
+            $set:{
+              pos: index++,
+            }
+          });
+        });
+      } 
+    }).disableSelection();
+    
+}

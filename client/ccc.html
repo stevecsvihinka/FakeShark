@@ -9,19 +9,18 @@
 <template name="fakesharkPlayer">
 	<div class="container">
 		<div class="col-md-4"></div>
-		<div class="col-md-4">
+		<div class="col-md-4" id="audioDiv">
 			<br>
-			<audio controls autoplay id="player"></audio>
-			<span class="glyphicon glyphicon-random" id="random"></span>
+			<audio controls autoplay id="player">
+			</audio>
 		</div>
-		<div class="col-md-4"></div>
 	</div>
 
 	<div class="container">
 		<div class="row-fluid">
 			<div class="col-md-4" id="navcontainer"> <!--leftside-->
 			{{#if currentUser}}
- 			<span class="btn btn-default btn-file">
+ 			<span class="btn btn-default btn-file" id="browseFiles">
     		Browse Files <input type="file" id="inputAudio">
 			</span>	
 			<input type="submit" id="submitAudio" class="btn btn-default col-sm-4">
@@ -29,10 +28,15 @@
 			{{/if}}
 			
 			<ul id="songList" class="pushdown2 test">
+			<li>Playlist <i class="glyphicon glyphicon-random" id="random"></i></li>
 			{{#if Template.subscriptionsReady}}
-			{{#each showAudio}}
+			<!-- {{#each showAudio}} -->
+			{{#each card}}
 			{{#if isAudio}}
-			<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}" style="display: list-item">
+				{{#unless this.isUploaded}}
+  				{{> FS.UploadProgressBar}}
+  				{{/unless}}
+				<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}" style="display: list-item">
 				{{this.metadata}} 
 				<div class="inline">
 				<a href="{{this.url download=true}}" target="_parent">Download</a> |
@@ -48,7 +52,7 @@
 		</div> 
 	<div id="navcontainer" class="col-md-4">
 	<ul class="pushdown align test4">
-	<li id="leaderboard" class="usernames"><b>Leaderboard</b><div id="smallText">(click a user to toggle their songs)</div></li>
+	<li id="leaderboard" class="usernames"><b>Leaderboard</b></li>
 	{{#each users}}
 	<li class="usernames" id="{{this.username}}">
 	{{this.username}} <div class="totalPlays">Total Plays: {{this.plays}}</div>

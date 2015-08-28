@@ -47,10 +47,10 @@ a:visited{
 #inputAudio{
 	display: inline;
 }
+
 #submitAudio{
 	display: inline;
 	padding-right: 15px;
-
 }
 
 li{
@@ -84,9 +84,10 @@ li:nth-child(odd) { background: transparent; }
 .pushdown {
 	padding-top: 0px;
 }
-test{
+
+/*.test{
 margin-top: 65px;	
-}
+}*/
 
 .pushdown2 {
 	padding-top: 0px;
@@ -120,7 +121,7 @@ margin-top: 65px;
     display: inline;
 }
 
-span{
+#browseFiles{
 	float: left;
 }
 
@@ -149,9 +150,9 @@ li.selected {
 .test{
 
  overflow-y: auto;
+ overflow-x: auto;
  width:300px;
- height: 35
- 0px;
+ height: 350px;
  
 }
 .test4{
@@ -168,12 +169,22 @@ margin-top:5px!important;
 	background-color: #ffe5f2;
 }
 
-
-
 .noblue:hover {
 	background-color: #ffe5f2;
 }
 
+/*#random {
+	float: right;
+    vertical-align: middle;
+    clear: both!important;
+}
+*/
+
+/*#audioDiv {
+	display: table;
+}*/
+
 #random {
-	display: inline-block;
+	display: inline;
+	cursor: pointer;
 }
