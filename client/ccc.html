@@ -1,5 +1,5 @@
 <head>
-	<title>ccc</title>
+	<title>FakeShark: the Javascript music player</title>
 </head>
 
 <body>
@@ -7,75 +7,119 @@
 </body>
 
 <template name="fakesharkPlayer">
+	
+	<!-- the audio player -->
 	<div class="container">
-		<div class="col-md-4"></div>
-		<div class="col-md-4" id="audioDiv">
+		<div id="audioDiv">
 			<br>
-			<audio controls autoplay id="player">
-			</audio>
+			<audio controls autoplay id="player"></audio>
 		</div>
 	</div>
+	<!-- /the audio player -->
 
 	<div class="container">
 		<div class="row-fluid">
-			<div class="col-md-4" id="navcontainer"> <!--leftside-->
-			{{#if currentUser}}
- 			<span class="btn btn-default btn-file" id="browseFiles">
-    		Browse Files <input type="file" id="inputAudio">
-			</span>	
-			<input type="submit" id="submitAudio" class="btn btn-default col-sm-4">
-			
-			{{/if}}
-			
-			<ul id="songList" class="pushdown2 test">
-			<li>Playlist <i class="glyphicon glyphicon-random" id="random"></i></li>
-			{{#if Template.subscriptionsReady}}
-			<!-- {{#each showAudio}} -->
-			{{#each card}}
-			{{#if isAudio}}
-				{{#unless this.isUploaded}}
-  				{{> FS.UploadProgressBar}}
-  				{{/unless}}
-				<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}" style="display: list-item">
-				{{this.metadata}} 
-				<div class="inline">
-				<a href="{{this.url download=true}}" target="_parent">Download</a> |
-				<a id="songInfo">Add to Playlist</a>
-				</div>
-				</li>
-			{{/if}}
-			{{/each}}
-			{{else}}
-			Loading...
-			{{/if}}	
-			</ul>
-		</div> 
-	<div id="navcontainer" class="col-md-4">
-	<ul class="pushdown align test4">
-	<li id="leaderboard" class="usernames"><b>Leaderboard</b></li>
-	{{#each users}}
-	<li class="usernames" id="{{this.username}}">
-	{{this.username}} <div class="totalPlays">Total Plays: {{this.plays}}</div>
-	</li>
-	{{/each}}
-	</ul>
-</div>
- <!--middle-->
-	<div id="navcontainer" class="col-md-4">
-	{{> chat}}
-</div> <!--rightside-->
 
-</div>
-</div>
+			<!--leftside-->
+			<div class="col-md-4" id="navcontainer"> 
+				{{#if currentUser}}
+	 				<span class="btn btn-default btn-file" id="browseFiles">
+	    			Browse Files <input type="file" id="inputAudio">
+					</span>	
+					<input type="submit" id="submitAudio" class="btn btn-default col-sm-4">
+				{{/if}}
+				<ul id="songList" class="pushdown2 test">
+				<li><b>Playlist <i class="glyphicon glyphicon-random" id="random"></i></b></li>
+				{{#if Template.subscriptionsReady}}
+				<!-- {{#each showAudio}} -->
+				{{#each card}}
+					{{#if isAudio}}
+						{{#unless this.isUploaded}}
+	  						{{> FS.UploadProgressBar}}
+	  					{{/unless}}
+						<li id="{{this.url}}" class="noblue" rel="{{this.uploader}}" style="display: list-item">
+							{{this.metadata}} 
+							<div class="inline">
+								<a href="{{this.url download=true}}" target="_parent">Download</a> |
+								<a id="songInfo">Add to Playlist</a>
+							</div>
+						</li>
+					{{/if}}
+					{{/each}}
+					{{else}}
+						Loading...
+					{{/if}}	
+				</ul>	
+			</div> 
+			<!-- /leftside -->
+
+			<!-- middle -->
+			<div id="navcontainer" class="col-md-4">
+				<ul class="pushdown align test4">
+					<li id="leaderboard" class="usernames"><b>Leaderboard</b></li>
+					{{#each users}}
+						<li class="usernames" id="{{this.username}}">
+							{{this.username}} <div class="totalPlays">Total Plays: {{this.plays}}</div>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+	 		<!-- /middle -->
+
+		 	<!-- rightside -->
+			<div id="navcontainer" class="col-md-4 relative">
+				{{> chat}}
+			</div> 
+			<!-- /rightside -->
+
+		</div>
+	</div>
 </template>
 
 <template name="outer">
 	{{#if Template.subscriptionsReady}}
-		{{> loginButtons}}
+		<div id="signin">{{> loginButtons}}</div>
  		<img id="logotext" src="logotext.png"/>
 		<img id="shark" src="shark.png"/>
 		{{> fakesharkPlayer}}
 	{{else}}
-		Loading...
-	{{/if}}	
+		<table width="100%" height="100%">
+			<tr>
+				<td style="text-align: center; vertical-align: middle;">
+					<img id="loading" src="loading.gif"/>
+				</td>
+			</tr>
+		</table>
+	{{/if}}
+</template>
+
+<template name="chat">
+	{{#if currentUser}}
+		{{> chatInput}}
+	{{/if}}
+	<div class = "relative">
+	<ul class="pushdown2 test sortable-ui static"> 
+	<li><b>Chat</b></li>
+	  {{#each chat}}
+		  <li>
+		  	{{this.name}}: {{this.message}}
+		  </li>
+	  {{/each}}
+	 </ul>
+	 </div>
+</template>
+
+
+<template name="chatInput">
+	<form class="form-horizontal col-sm-8" style="max-width:100%" role="form-group" id="chatInput">
+        <div class="container" style="max-width:100%">
+            <div class="row">
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="message" id="message" placeholder="Enter message">
+                </div>
+
+                <button type="submit" value="Send" class="btn btn-default col-sm-4">Send</button>
+            </div>
+        </div>
+    </form>
 </template>

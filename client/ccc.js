@@ -19,29 +19,13 @@ Template.fakesharkPlayer.events({
     console.log(fsFile);      
     AudioCollection.insert(fsFile);
   }//submitAudio
-  // ,
-  // 'click #submitAudio': function(){
-  //   console.log('fuvk');
-  //   submitAudio().done(id3tags());
-  // }
-
 })//events
-
-// Template.fakesharkPlayer.events({
-//   'click #submitAudio': 
-//   submitAudio().done(id3tags());
-// })
 
 Template.fakesharkPlayer.events({
   'click #songInfo': function() {
     id3tags();
   }
 })
-
-// Template.fakesharkPlayer.autorun( function() {
-//     id3tags();
-//   })
-
 
 id3tags = function() {
   collectionId = 'cfs/files/AudioCollection/'+fsFileClone._id+'/'+fileClone.url;
@@ -111,8 +95,6 @@ Template.fakesharkPlayer.events({
   'click .usernames': function(clickedUsername){
    var userName =($(clickedUsername.target).attr('id'));
    console.log(userName);
-   gg = $("li[rel=" + userName +"]");
-   console.log(gg);
    $('.noblue').toggle(false);
    $("li[rel=" + userName +"]").toggle(true);
   }
@@ -162,8 +144,7 @@ Template.fakesharkPlayer.rendered = function(){
        }, // end of stop
        update: function(event, ui) {
         var index = 0;
-
-                
+           
         _.each($(".noblue"), function(item) {
           AudioCollection.update({_id: item._id}, {
             $set:{
@@ -175,3 +156,20 @@ Template.fakesharkPlayer.rendered = function(){
     }).disableSelection();
     
 }
+
+Template.chatInput.events({
+  'submit form#chatInput': function(e) {
+    event.preventDefault();
+    var chatInput = $(e.currentTarget);
+    var message = chatInput.find('#message').val();
+    var user = Meteor.user().username;
+    ChatRoom.insert({name: user, message: message});
+    $('#message').val('');
+  }
+});
+
+Template.chat.helpers({
+  chat:function(){
+    return ChatRoom.find();
+  }
+})

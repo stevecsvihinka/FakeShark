@@ -4,7 +4,13 @@
 	padding-top: 50px;
 }
 body {
-	background-color: #E5FFF2;
+	background-color: aqua;
+	background-image: url("ocean.gif");
+	background-size: 100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    height:100%;
+    width:100%;
 }
 
 #navcontainer ul
@@ -57,8 +63,13 @@ li{
 	max-width: 600px;
 }
 
-li { background: white; }
-li:nth-child(odd) { background: transparent; }
+li { 
+	background: rgba(255, 255, 255, 0.5); /*white*/
+}
+li:nth-child(even) { 
+	background: rgba(0, 0, 0, 0.25); /*black*/
+	color: white !important;
+}
 
 #logotext {
 	width: 500px;
@@ -85,9 +96,9 @@ li:nth-child(odd) { background: transparent; }
 	padding-top: 0px;
 }
 
-/*.test{
+.test{
 margin-top: 65px;	
-}*/
+}
 
 .pushdown2 {
 	padding-top: 0px;
@@ -138,12 +149,12 @@ margin-top: 65px;
 }
 
 audio {
-	display: table;
+  display: table;
   margin: 0 auto;
 }
 
 li.selected {
-	background-color: #ffe5f2;
+	background-color: #66ff66;
 	color: white;
 }
 
@@ -166,25 +177,39 @@ margin-top:5px!important;
 }
 
 .usernames:hover {
-	background-color: #ffe5f2;
+	background-color: #66ff66;
 }
 
 .noblue:hover {
-	background-color: #ffe5f2;
+	background-color: #66ff66;
 }
-
-/*#random {
-	float: right;
-    vertical-align: middle;
-    clear: both!important;
-}
-*/
-
-/*#audioDiv {
-	display: table;
-}*/
 
 #random {
-	display: inline;
+	float: right;
+	margin-right: 10px;
 	cursor: pointer;
+}
+#random:hover {
+	color: #66ff66;
+}
+
+#signin {
+    color: black !important;
+    font-size: 20px;
+}
+
+#login-sign-in-link {
+	color: black !important;
+	font: 20px "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+}
+
+#login-name-link {
+	color: black !important;
+	font: 20px "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+}
+
+#message {
+	position: absolute !important;
+	width: 100% !important;
+    overflow: hidden;
 }
